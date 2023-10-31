@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-const InitialPage = () => {
+const Eventos = () => {
     return (
         <View style={styles.container}>
-            <Text>InitialPage!</Text>
+            <Text>Eventos</Text>
             <StatusBar style="auto" />
         </View>
     )
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InitialPage
+export default Eventos

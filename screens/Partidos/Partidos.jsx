@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-const InitialPage = () => {
+const Partidos = () => {
     return (
         <View style={styles.container}>
-            <Text>InitialPage!</Text>
+            <Text>Partidos</Text>
             <StatusBar style="auto" />
         </View>
     )
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InitialPage
+export default Partidos

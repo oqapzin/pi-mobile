@@ -1,17 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Deputados from "./screens/Deputados"
-import Partidos from "./screens/Partidos"
-import Proposicoes from "./screens/Proposicoes"
-import Eventos from "./screens/Eventos"
+import Deputados from "./screens/Deputados/Deputados"
+import Partidos from "./screens/Partidos/Partidos"
+import Proposicoes from "./screens/Proposicoes/Proposicoes"
+import Eventos from "./screens/Eventos/Eventos"
 import InitialPage from './screens/InitialPage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import DeputadosStack from './screens/Deputados/DeputadosStack';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -24,7 +23,7 @@ export default function App() {
       >
         <Tab.Screen
           name="Deputados"
-          component={Deputados}
+          component={DeputadosStack}
           options={{
             tabBarLabel: 'Deputados',
             tabBarIcon: ({ color, size }) => (
@@ -38,6 +37,16 @@ export default function App() {
             tabBarLabel: 'Partidos',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="flag" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="InitialPage"
+          component={InitialPage}
+          options={{
+            tabBarLabel: 'InitialPage',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="book" color={color} size={size} />
             ),
           }}
         />
