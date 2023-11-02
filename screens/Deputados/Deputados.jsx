@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import CardDeputado from '../../components/Deputados/CardDeputado';
 import axiosConnect from "../../services/api/ConsumeAPI"
-import { ActivityIndicator } from 'react-native-paper';
-const Deputados = ({navigation, route}) => {
+const Deputados = ({ navigation, route }) => {
     const [queryDeputados, setQueryDeputados] = useState([])
 
     useEffect(() => {
@@ -15,7 +14,7 @@ const Deputados = ({navigation, route}) => {
 
     return (
         <View>
-            <CardDeputado arrayData={queryDeputados} />
+            <CardDeputado arrayData={queryDeputados} navigation={navigation} />
 
             <StatusBar style="auto" />
         </View>
