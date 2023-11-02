@@ -9,6 +9,7 @@ const Partidos = () => {
         </View>
     )
 }
+//teste
 
 const styles = StyleSheet.create({
     container: {
