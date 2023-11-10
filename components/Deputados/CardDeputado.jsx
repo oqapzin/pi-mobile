@@ -8,7 +8,6 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
     const [oldDataDeputados, setOldDataDeputados] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
-
     useEffect(() => {
         setDeputados(arrayData)
         setOldDataDeputados(arrayData)
@@ -29,7 +28,7 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <InputFilter setInputData={(e) => filter(e)} />
             {isLoading ?
                 <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
@@ -41,9 +40,10 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
                             <Card.Title
                                 key={item.id}
                                 title={`${item.nome}`}
+                                style={styles.card}
                                 subtitle={`${item.siglaPartido ? item.siglaPartido + " -" : ""} ${item.siglaUf}`}
-                                left={() => <Avatar.Image size={40} source={{ uri: item.urlFoto }} />}
-                                right={() => <IconButton icon="more" onPress={() => navigation.push("deputado", { id: item.id })} />}
+                                left={() => <Avatar.Image size={50} source={{ uri: item.urlFoto }} />}
+                                right={() => <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: item.id})} />}
                             />
                         )}
                         keyExtractor={(item) => item.id.toString()}
@@ -56,8 +56,19 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    card: {
+        backgroundColor: "#FFE2A3",
+        marginTop: 5,
+        marginHorizontal: 12,
+        borderRadius: 5
+    },
     scroll: {
-        width: "100%"
+        width: "100%",
     },
     loading: {
         justifyContent: "center",

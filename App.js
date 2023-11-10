@@ -6,9 +6,12 @@ import Proposicoes from "./screens/Proposicoes/Proposicoes"
 import Eventos from "./screens/Eventos/Eventos"
 import InitialPage from './screens/InitialPage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DeputadosStack from './screens/Deputados/DeputadosStack';
+import { Text } from 'react-native-paper';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,16 +19,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="InitialPage"
+        initialRouteName="Inicio"
         screenOptions={{
           tabBarActiveTintColor: '#ecb334',
+          headerStyle: {backgroundColor: "#ecb334"},
+          headerTintColor: "#101F41",
+          headerTitleStyle: {
+            textTransform: "uppercase"
+          },
         }}
       >
         <Tab.Screen
           name="Deputados"
           component={DeputadosStack}
           options={{
-            tabBarLabel: 'Deputados',
+            headerTitle: "Listagem dos Deputados",
             tabBarIcon: ({ color, size }) => (
               <Fontisto name="persons" color={color} size={size} />
             ),
@@ -41,13 +49,19 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="InitialPage"
+          name="Inicio"
           component={InitialPage}
+          headerStyle={{outerHeight: "100%"}}
+     
           options={{
-            tabBarLabel: 'InitialPage',
+            headerTitleAlign: "center",
+            /*headerTitleStyle*/ 
+            headerTitle: () => <View style={{flexDirection: "row"}}><MaterialCommunityIcons name="book-open-variant" color="" size={32} /><Text variant="titleLarge" style={{fontWeight: 600, marginTop: 3}}>DEPUTADOS</Text></View>,
+         
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="book" color={color} size={size} />
+              <Ionicons name="home" color={color} size={size} />
             ),
+            
           }}
         />
         <Tab.Screen
