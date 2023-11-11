@@ -1,10 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import ButtonDeputado from '../components/Button/Button';
 
 const InitialPage = () => {
     return (
         <View style={styles.container}>
-            <Text>InitialPage!</Text>
+            <ButtonDeputado />
+            <ButtonDeputado />
+            <ButtonDeputado />
+            <ButtonDeputado />
+            <ButtonDeputado />
+            <ButtonDeputado />
+
             <StatusBar style="auto" />
         </View>
     )
@@ -13,9 +20,9 @@ const InitialPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start'
     },
 });
 
