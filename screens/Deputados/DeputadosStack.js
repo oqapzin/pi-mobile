@@ -10,12 +10,19 @@ const DeputadosStack = () => {
     return (
         <>
             <Stack.Navigator
+                initialRouteName="deputados"
                 screenOptions={{
-                    headerShown: false
+                    tabBarActiveTintColor: '#ecb334',
+                    headerStyle: { backgroundColor: "#ecb334" },
+                    headerTintColor: "#101F41",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+
                 }}>
-                <Stack.Screen name="deputados" component={Deputados} />
-                <Stack.Screen name="deputado" component={Deputado} />
-                <Stack.Screen name="gastos-deputado" component={Gastos} />
+                <Stack.Screen name="deputados" component={Deputados} options={{ title: 'Lista de Deputados' }} />
+                <Stack.Screen name="deputado" component={Deputado} options={{ title: 'Deputado' }} />
+                <Stack.Screen name="gastos-deputado" component={Gastos} options={{ title: 'Gastos' }} />
             </Stack.Navigator>
         </>
     )
