@@ -1,22 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import axiosConnect from "../../services/api/ConsumeAPI"
+import CardPartido from '../../components/Partidos/CardPartido';
+const Partidos = ({ navigation, route }) => {
+    const [queryPartidos, setQueryPartidos] = useState([])
 
-const Partidos = () => {
+    useEffect(() => {
+        axiosConnect.get(`/partidos`).then(result => {
+            setQueryPartidos(result.data.dados)
+        })
+    }, [])
+
     return (
-        <View style={styles.container}>
-            <Text>Partidos</Text>
+        <View>
+            <CardPartido arrayData={queryPartidos} navigation={navigation} />
+
             <StatusBar style="auto" />
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default Partidos

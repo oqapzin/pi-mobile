@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { ActivityIndicator, Avatar, Card, IconButton } from 'react-native-paper'
-import InputFilter from './InputFilter'
+import InputFilter from '../Deputados/InputFilter'
 
-const CardDeputado = ({ navigation, arrayData = [] }) => {
-    const [deputados, setDeputados] = useState([])
-    const [oldDataDeputados, setOldDataDeputados] = useState([])
+const CardPartido = ({ navigation, arrayData = [] }) => {
+    const [partidos, setPartidos] = useState([])
+    const [oldDataPartidos, setOldDataPartidos] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
-        setDeputados(arrayData)
-        setOldDataDeputados(arrayData)
+        setPartidos(arrayData)
+        setOldDataPartidos(arrayData)
         setIsLoading(false)
     }, [arrayData])
 
 
     const filter = (inputValue) => {
         if (inputValue !== '') {
-            const filteredData = deputados.filter((item) => {
+            const filteredData = partidos.filter((item) => {
                 return item.nome.toLowerCase().includes(inputValue.toLowerCase());
             });
-            setDeputados(filteredData)
+            setPartidos(filteredData)
         }
         else {
-            setDeputados(oldDataDeputados)
+            setPartidos(oldDataPartidos)
         }
     }
 
@@ -36,14 +36,13 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
                 :
                 <>
                     <FlatList
-                        data={deputados}
+                        data={partidos}
                         renderItem={({ item }) => (
                             <Card.Title
                                 key={item.id}
                                 title={`${item.nome}`}
-                                subtitle={`${item.siglaPartido ? item.siglaPartido + " -" : ""} ${item.siglaUf}`}
-                                left={() => <Avatar.Image size={40} source={{ uri: item.urlFoto }} />}
-                                right={() => <IconButton icon="more" onPress={() => navigation.push("deputado", { id: item.id })} />}
+                                subtitle={`${item.sigla}`}
+                                right={() => <IconButton icon="arrow-right" onPress={()=> navigation.push("Partido", { Id: item.id})} />}
                             />
                         )}
                         keyExtractor={(item) => item.id.toString()}
@@ -67,4 +66,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CardDeputado
+export default CardPartido
