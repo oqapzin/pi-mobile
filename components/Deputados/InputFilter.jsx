@@ -4,6 +4,7 @@ import { Searchbar } from "react-native-paper";
 
 const InputFilter = ({ setInputData, whitePlaceHolder = false }) => {
     const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(() => {
         setInputData(searchQuery)
     }, [searchQuery])
@@ -11,11 +12,12 @@ const InputFilter = ({ setInputData, whitePlaceHolder = false }) => {
     return (
         <Searchbar
             style={{ backgroundColor: whitePlaceHolder ? "#D9D9D994" : "#D9D9D9", margin: 12, borderRadius: 5 }}
-            placeholder="Buscar"
-            mode="bar"
             iconColor={whitePlaceHolder ? "#FFF" : "#000"}
             placeholderTextColor={whitePlaceHolder ? "#FFF" : "#000"}
-            onChangeText={(e) => setSearchQuery(e)}
+            placeholder={"Buscar"}
+            mode={"bar"}
+            autoCapitalize={"none"}
+            onChangeText={(s) => setSearchQuery(s)}
             value={searchQuery}
         />
     );

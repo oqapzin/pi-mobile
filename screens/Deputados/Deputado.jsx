@@ -8,35 +8,31 @@ const Deputado = ({ navigation, route }) => {
   const [queryDeputado, setQueryDeputado] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-
   useEffect(() => {
+    console.log(route.params.id)
     axiosConnect.get(`/deputados/${route.params.id}`).then(result => {
       setQueryDeputado(result.data.dados)
-      setIsLoading(false)
     })
+    setTimeout(() => {
+      navigation.setOptions({ title: `Deputado ${route.params.name}` })
+      setIsLoading(false)
+    }, 1000)
 
-    navigation.setOptions({ title: `Deputado ${route.params.name}` })
   }, [])
+
+  console.log(queryDeputado)
 
   return (
     <>
-      {
-        isLoading ?
-          <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
-          :
-          <DeputadoData name={queryDeputado["ultimoStatus"].nome} state={queryDeputado["ultimoStatus"].siglaUf} school={queryDeputado.escolaridade} partido={queryDeputado["ultimoStatus"].siglaPartido} date={queryDeputado.dataNascimento}  photo={queryDeputado["ultimoStatus"].urlFoto} navigation={navigation} />
+      {isLoading ?
+        <ActivityIndicator size={50} animating={true} color="#ecb334" style={{ marginTop: 30 }} />
+        :
+        <>
+          <DeputadoData name={queryDeputado["ultimoStatus"].nome} state={queryDeputado["ultimoStatus"].siglaUf} school={queryDeputado.escolaridade} partido={queryDeputado["ultimoStatus"].siglaPartido} date={queryDeputado.dataNascimento} photo={queryDeputado["ultimoStatus"].urlFoto} navigation={navigation} />
+        </>
       }
     </>
   )
 }
 
 export default Deputado
-
-const styles = StyleSheet.create({
-  loading: {
-    justifyContent: "center",
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50
-  }
-});

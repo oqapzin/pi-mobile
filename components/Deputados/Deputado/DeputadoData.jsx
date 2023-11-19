@@ -35,6 +35,48 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
             </View>
         )
     }
+    function eventosText() {
+        return (
+            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
+                <FontAwesome name="dollar" size={20} />
+                <Text>Eventos</Text>
+            </View>
+        )
+    }
+    function frentesText() {
+        return (
+            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
+                <FontAwesome name="dollar" size={20} />
+                <Text>Frentes</Text>
+            </View>
+        )
+    }
+
+    function discursosText() {
+        return (
+            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
+                <FontAwesome name="dollar" size={20} />
+                <Text>Discursos</Text>
+            </View>
+        )
+    }
+
+    function orgaosText() {
+        return (
+            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
+                <FontAwesome name="dollar" size={20} />
+                <Text>Orgãos</Text>
+            </View>
+        )
+    }
+    function mandatosText() {
+        return (
+            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
+                <FontAwesome name="dollar" size={20} />
+                <Text>Mandatos</Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.Container}>
@@ -42,7 +84,17 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
                 style={styles.CardStyle}
                 left={() => returnData()}
             />
-            <ButtonDeputado labelText={gastosText()} routeName={"gastos-deputado"} navigation={navigation} />
+            <View style={{ flexDirection: "row" }}>
+                <ButtonDeputado labelText={gastosText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={eventosText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={frentesText()} routeName={"gastos-deputado"} navigation={navigation} />
+            </View>
+            <View style={{ flexDirection: "row" }}>
+                <ButtonDeputado labelText={discursosText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={orgaosText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={mandatosText()} routeName={"gastos-deputado"} navigation={navigation} />
+            </View>
+
         </View>
     )
 }
@@ -66,7 +118,8 @@ const styles = StyleSheet.create({
     LeftText: {
         textTransform: "uppercase",
         fontWeight: "700",
-        color: "#E19500",
+        color: "#FFF",
+        marginLeft: 2,
         margin: 1
     },
 
@@ -81,8 +134,9 @@ const styles = StyleSheet.create({
     },
 
     CardStyle: {
-        backgroundColor: "#D9D9D9",
+        backgroundColor: "#FFAD62",
         marginTop: 28,
+        marginBottom: 48,
         borderRadius: 20,
         padding: 60,
     },

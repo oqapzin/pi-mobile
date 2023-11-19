@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const ButtonDeputado = ({ labelText = "", routeName = "", routeObject = [], usePush = true, initialPageButton=false, navigation }) => {
+const ButtonDeputado = ({ labelText = "", routeName = "", routeObject = [], usePush = true, initialPageButton = false, navigation }) => {
 
     const isPush = () => {
         if (usePush) {
@@ -11,10 +11,10 @@ const ButtonDeputado = ({ labelText = "", routeName = "", routeObject = [], useP
             navigation.navigate(routeName, routeObject)
         }
     }
-    
+
     return (
-        <TouchableOpacity style={[initialPageButton?styles.buttonStylelarge:styles.buttonStyle]} onPress={() => isPush()}>
-            <View style={[initialPageButton?styles.buttonSpaceLarge:styles.buttonSpace]}>
+        <TouchableOpacity style={[initialPageButton ? styles.buttonStylelarge : styles.buttonStyle]} onPress={() => isPush()}>
+            <View style={[initialPageButton ? styles.buttonSpaceLarge : styles.buttonSpace]}>
                 <Text style={styles.buttonText}>{labelText}</Text>
             </View>
         </TouchableOpacity>

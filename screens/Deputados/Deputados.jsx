@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import CardDeputado from '../../components/Deputados/CardDeputado';
 import axiosConnect from "../../services/api/ConsumeAPI"
-import { Text } from 'react-native-paper';
 const Deputados = ({ navigation, route }) => {
     const [queryDeputados, setQueryDeputados] = useState([])
 
