@@ -1,16 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react'
-import Deputados from './Deputados';
-import Deputado from './Deputado';
-import Gastos from './Deputado/Gastos';
+import Eventos from './Eventos';
 
 const Stack = createNativeStackNavigator();
 
-const DeputadosStack = () => {
+const EventosStack = () => {
     return (
         <>
             <Stack.Navigator
-                initialRouteName="deputados"
+                initialRouteName="eventos"
                 screenOptions={{
                     tabBarActiveTintColor: '#ecb334',
                     headerStyle: { backgroundColor: "#ecb334" },
@@ -20,12 +18,10 @@ const DeputadosStack = () => {
                     },
 
                 }}>
-                <Stack.Screen name="deputados" component={Deputados} options={{ title: 'Lista de Deputados' }} />
-                <Stack.Screen name="deputado" component={Deputado} options={{ title: 'Deputado' }} />
-                <Stack.Screen name="gastos-deputado" component={Gastos} options={{ title: 'Gastos' }} />
+                <Stack.Screen name="eventos" component={Eventos} options={{ title: 'Eventos' }} />
             </Stack.Navigator>
         </>
     )
 }
 
-export default DeputadosStack
+export default EventosStack

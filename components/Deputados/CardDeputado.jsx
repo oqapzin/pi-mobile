@@ -15,6 +15,14 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
     }, [arrayData])
 
 
+    const AvatarImage = (imageUri) => {
+        return (
+            <View style={styles.AvatarView}>
+                <Avatar.Image size={50} style={{ backgroundColor: '#101F41' }} source={{ uri: imageUri }} />
+            </View>
+        )
+    }
+
     const filter = (inputValue) => {
         if (inputValue !== '') {
             const filteredData = deputados.filter((item) => {
@@ -28,10 +36,10 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
     }
 
     return (
-        <View style={styles.container}>
-            <InputFilter setInputData={(e) => filter(e)} />
+        <View style={styles.Container}>
+            <InputFilter setInputData={(value) => filter(value)} />
             {isLoading ?
-                <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
+                <ActivityIndicator style={styles.Loading} animating={true} color="#ecb334" />
                 :
                 <>
                     <FlatList
@@ -39,15 +47,18 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
                         renderItem={({ item }) => (
                             <Card.Title
                                 key={item.id}
+                                style={styles.Card}
                                 title={`${item.nome}`}
-                                style={styles.card}
                                 subtitle={`${item.siglaPartido ? item.siglaPartido + " -" : ""} ${item.siglaUf}`}
-                                left={() => <Avatar.Image size={50} source={{ uri: item.urlFoto }} />}
-                                right={() => <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: item.id})} />}
+                                titleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "bold" }}
+                                subtitleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "600" }}
+                                removeClippedSubviews={true}
+                                left={() => AvatarImage(item.urlFoto)}
+                                right={() => <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: item.id, name: item.nome })} />}
                             />
                         )}
                         keyExtractor={(item) => item.id.toString()}
-                        style={styles.scroll}
+                        style={styles.Scroll}
                     />
                 </>
             }
@@ -56,25 +67,37 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    Container: {
         justifyContent: "center",
         alignItems: 'center',
         justifyContent: 'center'
     },
-    card: {
+
+    Card: {
         backgroundColor: "#FFE2A3",
         marginTop: 5,
         marginHorizontal: 12,
         borderRadius: 5
     },
-    scroll: {
+
+    Scroll: {
         width: "100%",
     },
-    loading: {
+
+    Loading: {
         justifyContent: "center",
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 50
+    },
+
+    AvatarView: {
+        backgroundColor: "#D58C00",
+        width: 54,
+        height: 54,
+        borderRadius: 58,
+        paddingTop: 1.7,
+        paddingLeft: 2
     }
 });
 
