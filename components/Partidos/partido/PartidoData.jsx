@@ -1,57 +1,69 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Avatar, Card, Text } from 'react-native-paper'
-import ButtonPartido from '../../Button/Button'
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React, { useEffect, useState } from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, Avatar, Card, IconButton } from 'react-native-paper'
+import InputFilter from '../Deputados/InputFilter'
 
-const PartidoData = ({ name = "", sigla = "", numeroEleitoral = "", navigation }) => {
+const CardPartido = ({ navigation, arrayData = [] }) => {
+    const [partidos, setPartidos] = useState([])
+    const [oldDataPartidos, setOldDataPartidos] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
-    function returnData() {
-        return (
-            <View style={styles.View}>
-                <View style={styles.LeftData}>
-                    <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
-                    <Text style={styles.LeftText}>Sigla: <Text>{sigla}</Text></Text>
-                    <Text style={styles.LeftText}>Numero Eleitoral: <Text>{numeroEleitoral}</Text></Text>
-                </View>
-            </View>
-        )
+
+    useEffect(() => {
+        setPartidos(arrayData)
+        setOldDataPartidos(arrayData)
+        setIsLoading(false)
+    }, [arrayData])
+
+
+    const filter = (inputValue) => {
+        if (inputValue !== '') {
+            const filteredData = partidos.filter((item) => {
+                return item.nome.toLowerCase().includes(inputValue.toLowerCase());
+            });
+            setPartidos(filteredData)
+        }
+        else {
+            setPartidos(oldDataPartidos)
+        }
     }
-
 
     return (
         <View>
-            <Card.Title
-                style={styles.cardStyle}
-                left={() => returnData()}
-            />
-            <ButtonPartido labelText={situacaoText()} routeName={"situacao-partido"} navigation={navigation} />
+            <InputFilter setInputData={(e) => filter(e)} />
+            {isLoading ?
+                <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
+                :
+                <>
+                    <FlatList
+                        data={partidos}
+                        renderItem={({ item }) => (
+                            <Card.Title
+                                key={item.id}
+                                title={`${item.nome}`}
+                                subtitle={`${item.sigla}`}
+                                right={() => <IconButton icon="arrow-right" onPress={()=> navigation.push("Partido", { Id: item.id})} />}
+                            />
+                        )}
+                        keyExtractor={(item) => item.id.toString()}
+                        style={styles.scroll}
+                    />
+                </>
+            }
         </View>
     )
 }
 
-export default PartidoData
-
 const styles = StyleSheet.create({
-    View: {
-        flexDirection: "row",
+    scroll: {
+        width: "100%"
     },
-
-    LeftData: {
-        marginHorizontal: -40,
-        width: 200
-    },
-
-    LeftText: {
-        color: "#E19500",
-        margin: 1
-    },
-
-    cardStyle: {
-        backgroundColor: "#D9D9D9",
-        marginHorizontal: 27,
-        marginTop: 28,
-        borderRadius: 20,
-        padding: 60,
+    loading: {
+        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50
     }
 });
+
+export default CardPartido

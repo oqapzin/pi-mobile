@@ -35,7 +35,7 @@ const InitialPage = ({ navigation }) => {
             <View style={styles.flexDirectionRow}>
 
                 <ButtonDeputado labelText={DeputadosText()} initialPageButton={true} usePush={false} routeName="Deputados" routeObject={{ screen: "deputados" }} navigation={navigation} />
-                <ButtonDeputado labelText={Partidostext()} initialPageButton={true} usePush={false} routeName="Deputados" routeObject={{ screen: "deputados" }} navigation={navigation} />
+                <ButtonDeputado labelText={Partidostext()} initialPageButton={true} usePush={false} routeName="Partidos" routeObject={{ screen: "Partidos" }} navigation={navigation} />
                 <ButtonDeputado labelText={Votacoestext()} initialPageButton={true} usePush={false} routeName="Deputados" routeObject={{ screen: "deputados" }} navigation={navigation} />
                 <ButtonDeputado labelText="Proposições" initialPageButton={true} usePush={false} routeName="Proposicoes" routeObject={{ screen: "proposicoes" }} navigation={navigation} />
                 <ButtonDeputado initialPageButton={true} />
