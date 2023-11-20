@@ -10,6 +10,7 @@ import DeputadosStack from './screens/Deputados/DeputadosStack';
 import { Image, StyleSheet } from 'react-native';
 import EventosStack from './screens/Eventos/EventosStack';
 import ProposicoesStack from './screens/Proposicoes/ProposicoesStack';
+import PartidosStack from './screens/Partidos/PartidosStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ export default function App() {
           }} />
         <Tab.Screen
           name="Partidos"
-          component={Partidos}
+          component={PartidosStack}
           options={{
             headerShown: false,
             tabBarLabel: 'Partidos',

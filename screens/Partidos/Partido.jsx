@@ -12,6 +12,12 @@ const Partido = ({ navigation, route }) => {
     axiosConnect.get(`/partidos/${route.params.id}`).then(result => {
       setQueryPartido(result.data.dados)
       setIsLoading(false)
+
+      setTimeout(() => {
+        navigation.setOptions({ title: `Deputado ${route.params.name}` })
+        setIsLoading(false)
+      }, 1000)
+  
     })
   }, [])
 
@@ -21,7 +27,8 @@ const Partido = ({ navigation, route }) => {
         isLoading ?
           <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
           :
-          <PartidoData name={queryPartido["ultimoStatus"].nome} state={queryPartido["ultimoStatus"].sigla} navigation={navigation} />
+          <PartidoData name={queryPartido["ultimoStatus"].nome} navigation={navigation}/>
+          
       }
     </>
   )
