@@ -27,7 +27,7 @@ const Partido = ({ navigation, route }) => {
         isLoading ?
           <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
           :
-          <PartidoData name={queryPartido["ultimoStatus"].nome} navigation={navigation}/>
+          <PartidoData name={queryPartido.nome} number={queryPartido["status"].idLegislatura} QntDeputados={queryPartido["status"].totalPosse} sigla={queryPartido.sigla} photo={queryPartido["status"].urlLogo} navigation={navigation}/>
           
       }
     </>

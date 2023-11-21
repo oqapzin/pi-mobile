@@ -23,6 +23,13 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
         setPartidos(array.filter((v) => v.nome.includes(inputValue)))
     }
 
+    const AvatarImage = (imageUri) => {
+        return (
+            <View style={styles.AvatarView}>
+                <Avatar.Image size={50} style={{ backgroundColor: '#101F41' }} source={{ uri: imageUri }} />
+            </View>
+        )
+    }
 
     function renderItem({ item }) {
         return <Card.Title
@@ -32,6 +39,7 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
             subtitle={`${item.sigla}`}
             titleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "bold" }}
             subtitleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "600" }}
+            left={() => AvatarImage(item.numeroEleitoral.urlLogo)}
             right={() => <View style={{ flexDirection: "row" }}>
             <IconButton icon="arrow-right" onPress={() => navigation.push("partido", { id: item.id, name: item.nome })} /></View>}
         />

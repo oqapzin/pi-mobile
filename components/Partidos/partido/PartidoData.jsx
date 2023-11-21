@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Avatar, Card, Text } from 'react-native-paper'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const PartidoData = ({ name = "", sigla = "", navigation }) => {
+const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo = "", number = "", navigation }) => {
 
     function returnData() {
         return (
@@ -14,7 +14,9 @@ const PartidoData = ({ name = "", sigla = "", navigation }) => {
                     </View>
                     <View style={styles.LeftData}>
                         <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
-                        <Text style={styles.LeftText}>Sigla: <Text>{siglas}</Text></Text>
+                        <Text style={styles.LeftText}>Sigla: <Text>{sigla}</Text></Text>
+                        <Text style={styles.LeftText}>Quantidade de deputados: <Text>{QntDeputados}</Text></Text>
+                        <Text style={styles.LeftText}>Numero do Partido: <Text>{number}</Text></Text>
                     </View>
                 </View>
             </View>
