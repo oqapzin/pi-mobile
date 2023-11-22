@@ -36,7 +36,7 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
             <IconButton icon="arrow-right" onPress={() => navigation.push("partido", { id: item.id, name: item.nome })} /></View>}
         />
     }
-    console.log(IconButton)
+    
     return (
         <View style={styles.Container}>
             <InputFilter setInputData={(value) => filter(value)} />

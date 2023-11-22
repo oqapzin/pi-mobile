@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { ActivityIndicator, Avatar, Card, IconButton } from 'react-native-paper'
-import InputFilter from '../Deputados/InputFilter'
+import InputFilter from '../../Deputados/InputFilter'
 
 const CardPartido = ({ navigation, arrayData = [] }) => {
     const [partidos, setPartidos] = useState([])

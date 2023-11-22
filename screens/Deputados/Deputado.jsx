@@ -27,9 +27,7 @@ const Deputado = ({ navigation, route }) => {
       {isLoading ?
         <ActivityIndicator size={50} animating={true} color="#ecb334" style={{ marginTop: 30 }} />
         :
-        <>
-          <DeputadoData name={queryDeputado["ultimoStatus"].nome} state={queryDeputado["ultimoStatus"].siglaUf} school={queryDeputado.escolaridade} partido={queryDeputado["ultimoStatus"].siglaPartido} date={queryDeputado.dataNascimento} photo={queryDeputado["ultimoStatus"].urlFoto} navigation={navigation} />
-        </>
+        <DeputadoData name={queryDeputado["ultimoStatus"].nome} state={queryDeputado["ultimoStatus"].siglaUf} school={queryDeputado.escolaridade} partido={queryDeputado["ultimoStatus"].siglaPartido} date={queryDeputado.dataNascimento} photo={queryDeputado["ultimoStatus"].urlFoto} navigation={navigation} />
       }
     </>
   )

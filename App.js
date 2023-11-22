@@ -1,15 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Partidos from "./screens/Partidos/Partidos"
+import { Image, StyleSheet } from 'react-native';
 import InitialPage from './screens/InitialPage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DeputadosStack from './screens/Deputados/DeputadosStack';
-import { Image, StyleSheet } from 'react-native';
 import EventosStack from './screens/Eventos/EventosStack';
 import ProposicoesStack from './screens/Proposicoes/ProposicoesStack';
+import PartidosStack from './screens/Partidos/PartidosStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +38,7 @@ export default function App() {
           }} />
         <Tab.Screen
           name="Partidos"
-          component={Partidos}
+          component={PartidosStack}
           options={{
             headerShown: false,
             tabBarLabel: 'Partidos',
