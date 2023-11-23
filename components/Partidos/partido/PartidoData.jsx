@@ -3,25 +3,36 @@ import { StyleSheet, View } from 'react-native'
 import { Avatar, Card, Text } from 'react-native-paper'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo = "", number = "", navigation }) => {
+const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameDep="", navigation }) => {
 
     function returnData() {
         return (
-            <View>
+            <><View>
                 <View style={styles.ViewData}>
-                    <View style={styles.AvatarView}>
-                        <Avatar.Image style={{ marginRight: 50, backgroundColor: '#101F41' }} source={{ uri: photo }} />
-                    </View>
+
                     <View style={styles.LeftData}>
                         <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
                         <Text style={styles.LeftText}>Sigla: <Text>{sigla}</Text></Text>
                         <Text style={styles.LeftText}>Quantidade de deputados: <Text>{QntDeputados}</Text></Text>
-                        <Text style={styles.LeftText}>Numero do Partido: <Text>{number}</Text></Text>
                     </View>
+                    <Card.Title>
+                        <Text></Text>
+                    </Card.Title>
+            <View>
+                <Card>
+
+                <Text>as</Text>
+                </Card>
+            </View>
                 </View>
             </View>
+
+            </>
         )
+
+  
     }
+
 
 
     return (
@@ -55,7 +66,7 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "700",
         color: "#FFF",
-        marginLeft: 2,
+        marginLeft: 50,
         margin: 1
     },
 

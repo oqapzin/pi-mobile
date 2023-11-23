@@ -14,12 +14,14 @@ const Partido = ({ navigation, route }) => {
       setIsLoading(false)
 
       setTimeout(() => {
-        navigation.setOptions({ title: `Deputado ${route.params.name}` })
+        navigation.setOptions({ title: `Partido ${route.params.name}` })
         setIsLoading(false)
       }, 1000)
   
     })
   }, [])
+
+  console.log(queryPartido)
 
   return (
     <>
@@ -27,7 +29,15 @@ const Partido = ({ navigation, route }) => {
         isLoading ?
           <ActivityIndicator style={styles.loading} animating={true} color="#ecb334" />
           :
-          <PartidoData name={queryPartido.nome} number={queryPartido["status"].idLegislatura} QntDeputados={queryPartido["status"].totalPosse} sigla={queryPartido.sigla} photo={queryPartido["status"].urlLogo} navigation={navigation}/>
+          <PartidoData 
+          name={queryPartido.nome}
+          QntDeputados={queryPartido["status"].totalPosse}
+          sigla={queryPartido.sigla}
+          nameDep={queryPartido["status"].lider.nome}
+          photo={queryPartido["status"].lider.urlFoto}
+
+          
+          navigation={navigation}/>
           
       }
     </>

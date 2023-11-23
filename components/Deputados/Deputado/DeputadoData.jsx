@@ -16,7 +16,6 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
                         <Avatar.Image style={{ marginRight: 50, backgroundColor: '#101F41' }} source={{ uri: photo }} />
                     </View>
                     <View style={styles.LeftData}>
-                        <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
                         <Text style={styles.LeftText}>Idade: <Text>{calculateAge(date)}</Text></Text>
                         <Text style={styles.LeftText}>Estado: <Text>{states[state.toUpperCase() || "DF"]}</Text></Text>
                         <Text style={styles.LeftText}>Escolaridade: <Text>{school}</Text></Text>
