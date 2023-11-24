@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Avatar, Card, Text } from 'react-native-paper'
+import {Avatar, Card, Text } from 'react-native-paper'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import axiosConnect from '../../../services/api/ConsumeAPI';
 
-const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameDep="", navigation }) => {
+const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameDep="", siglaDp="", depFem="",depMas="", navigation }) => {
 
     function returnData() {
         return (
@@ -13,17 +14,13 @@ const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameD
                     <View style={styles.LeftData}>
                         <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
                         <Text style={styles.LeftText}>Sigla: <Text>{sigla}</Text></Text>
-                        <Text style={styles.LeftText}>Quantidade de deputados: <Text>{QntDeputados}</Text></Text>
+                        <Text style={styles.LeftText}>Deputados em exercicio: <Text>{QntDeputados}</Text></Text>
+                        <Text style={styles.LeftText}>Quantidade de deputadas: <Text>{depFem.length}</Text></Text>
+                        <Text style={styles.LeftText}>Quantidade de deputados: <Text>{depMas.length}</Text></Text>
                     </View>
-                    <Card.Title>
-                        <Text></Text>
-                    </Card.Title>
-            <View>
-                <Card>
+                    
 
-                <Text>as</Text>
-                </Card>
-            </View>
+
                 </View>
             </View>
 
@@ -31,6 +28,30 @@ const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameD
         )
 
   
+    }
+
+    function returnlider(){
+
+        return(
+
+            <>
+        
+            <View style={styles.ViewData}>
+                <View style={styles.AvatarView}>
+                    <Avatar.Image style={{ marginRight: 10, backgroundColor: '#101F41' }} source={{ uri: photo }} />
+                </View>
+                <View style={styles.LeftData}>
+
+                        <Text style={styles.LeftText}>Lider do partido</Text>
+                            <Text></Text>
+                        <Text style={styles.LeftText}>Nome:</Text>
+                            <Text>{nameDep}</Text>
+                        <Text style={styles.LeftText}>Estado:</Text>
+                            <Text> {siglaDp}</Text>
+                </View>
+            </View>
+        </>
+    )
     }
 
 
@@ -42,11 +63,18 @@ const PartidoData = ({ name = "", sigla = "", QntDeputados= "", photo= "", nameD
                 left={() => returnData()}
             />
 
+            <Card.Title
+                style={styles.CardStyle}
+                left={() => returnlider()}
+            />
+
         </View>
     )
 }
 
 export default PartidoData
+
+
 
 const styles = StyleSheet.create({
     Container: {
@@ -56,9 +84,13 @@ const styles = StyleSheet.create({
     ViewData: {
         flexDirection: "row",
     },
+    ViewData1: {
+        flexDirection: "column",
+        textAlign: "center"
+    },
 
     LeftData: {
-        marginHorizontal: -40,
+        marginHorizontal: 10,
         width: 200
     },
 
@@ -66,7 +98,7 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "700",
         color: "#FFF",
-        marginLeft: 50,
+        marginLeft: 5,
         margin: 1
     },
 
@@ -95,6 +127,7 @@ const styles = StyleSheet.create({
         borderRadius: 58,
         paddingTop: 3.1,
         paddingLeft: 3.1,
-        marginRight: 50
+        marginRight: 5,
+        textAlign:"center"
     }
 });

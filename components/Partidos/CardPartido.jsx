@@ -34,7 +34,7 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
             titleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "bold" }}
             subtitleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "600" }}
             right={() => <View style={{ flexDirection: "row" }}>
-            <IconButton icon="arrow-right" onPress={() => navigation.push("partido", { id: item.id, name: item.nome })} /></View>}
+            <IconButton icon="arrow-right" onPress={() => navigation.push("partido", { id: item.id, name: item.nome, sigla:item.sigla })} /></View>}
         />
     }
     console.log(IconButton)
