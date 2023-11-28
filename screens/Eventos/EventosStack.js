@@ -18,7 +18,7 @@ const EventosStack = () => {
                     },
 
                 }}>
-                <Stack.Screen name="eventos" component={Eventos} options={{ title: 'Eventos' }} />
+                <Stack.Screen name="Eventos" component={Eventos} options={{ title: 'Eventos' }} />
             </Stack.Navigator>
         </>
     )

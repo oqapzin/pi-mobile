@@ -28,6 +28,14 @@ const InitialPage = ({ navigation }) => {
             </View>
         )
     }
+    function Eventostext() {
+        return (
+            <View style={styles.textContainer}>
+                <Image style={styles.textImage} source={{ uri: "https://cdn.discordapp.com/attachments/1118283305628995694/1174015279584522350/image.png?ex=65660dee&is=655398ee&hm=bcc7490944a7eca554cd46f79b4c375b7413412e78974a26b843b3e325915fe0&" }} />
+                <Text style={styles.textStyle}>Eventos</Text>
+            </View>
+        )
+    }
 
 
     return (
@@ -37,9 +45,8 @@ const InitialPage = ({ navigation }) => {
                 <ButtonDeputado labelText={DeputadosText()} initialPageButton={true} usePush={false} routeName="Deputados" routeObject={{ screen: "deputados" }} navigation={navigation} />
                 <ButtonDeputado labelText={Partidostext()} initialPageButton={true} usePush={false} routeName="Partidos" routeObject={{ screen: "Partidos" }} navigation={navigation} />
                 <ButtonDeputado labelText={Votacoestext()} initialPageButton={true} usePush={false} routeName="Deputados" routeObject={{ screen: "deputados" }} navigation={navigation} />
-                <ButtonDeputado labelText="Proposições" initialPageButton={true} usePush={false} routeName="Proposicoes" routeObject={{ screen: "proposicoes" }} navigation={navigation} />
-                <ButtonDeputado initialPageButton={true} />
-                <ButtonDeputado initialPageButton={true} />
+                <ButtonDeputado labelText={Eventostext()} initialPageButton={true} usePush={false} routeName="Eventos" routeObject={{ screen: "Eventos" }} navigation={navigation} />
+
 
                 <StatusBar style="auto" />
             </View>

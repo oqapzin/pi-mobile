@@ -1,22 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import axiosConnect from "../../services/api/ConsumeAPI"
+import Agend from '../../components/Eventos/Eventos';
+const Eventos = ({ navigation, route }) => {
+    const [querryEventos, setQueryEventos] = useState([])
 
-const Eventos = () => {
+    useEffect(() => {
+        axiosConnect.get(`/eventos`).then(result => {
+            setQueryEventos(result.data.dados)
+        })
+    }, [])
+
     return (
-        <View style={styles.container}>
-            <Text>Eventos</Text>
-            <StatusBar style="auto" />
+        <View>
+            <Agend/>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default Eventos
