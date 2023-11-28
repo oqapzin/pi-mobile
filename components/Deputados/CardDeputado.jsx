@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, View, ListRenderItemInfo } from 'react-native'
 import { ActivityIndicator, Avatar, Card, IconButton } from 'react-native-paper'
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import InputFilter from './InputFilter'
+import { useCallback } from 'react'
 
 const CardDeputado = ({ navigation, arrayData = [] }) => {
     const [deputados, setDeputados] = useState([])
@@ -16,10 +17,11 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
 
     }, [arrayData])
 
-    useEffect(() => {
-        favDeputados.map(item => {
-            const newDeputados = JSON.parse(JSON.stringify(deputados))
 
+    const updateFav = () => {
+        const deputadosFav = JSON.parse(JSON.stringify(favDeputados))
+        deputadosFav.map(item => {
+            const newDeputados = JSON.parse(JSON.stringify(deputados))
             if (newDeputados.length > 0) {
                 let indexList = newDeputados.filter(item2 => item2.id == item)
                 newDeputados.splice(0, 0, newDeputados.splice(newDeputados.indexOf(indexList[0]), 1)[0])
@@ -27,8 +29,7 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
                 setOldDataDeputados(newDeputados)
             }
         })
-    }, [favDeputados])
-
+    }
 
     const AvatarImage = (imageUri) => {
         return (
@@ -44,64 +45,64 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
         setDeputados(array.filter((v) => v.nome.includes(inputValue)))
     }
 
-    const isFavorite = (deputadoId) => {
-        return (
-            favDeputados.toString().indexOf(deputadoId.toString()) == -1 ?
-                <IconButton icon="star-outline" iconColor="#825600" onPress={() => addFavoriteButton(deputadoId)} />
-                :
+   /*  const isFavorite = useCallback((deputadoId, deputadoName) => {
+        const updatedFavDeputados = favDeputados.filter((id) => id == deputadoId);
 
+        if (!updatedFavDeputados) {
+            return <View style={{ flexDirection: "row" }}>
                 <IconButton icon="star" iconColor="#825600" onPress={() => remFavoriteButton(deputadoId)} />
-        )
-    }
+                <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: deputadoId, name: deputadoName })} /></View>
+        } else {
+            return <View style={{ flexDirection: "row" }}>
+                <IconButton icon="star-outline" iconColor="#825600" onPress={() => addFavoriteButton(deputadoId)} />
+                <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: deputadoId, name: deputadoName })} />
+            </View>
+        }
+    }, [favDeputados]); */
 
 
     const getFavDeputados = async () => {
-        const response = await AsyncStorage.getItem("favDeputados2")
+        const response = await AsyncStorage.getItem("DeputadosFav")
         const deputados = response ? JSON.parse(response) : []
         setFavDeputados(deputados)
+        updateFav()
     }
 
-    const addFavoriteButton = async (deputadoId) => {
-        const deputadosFav = JSON.parse(JSON.stringify(favDeputados))
-        if (!deputadosFav.toString().indexOf(deputadoId) > -1) {
-            deputadosFav.push(deputadoId)
-            setFavDeputados(deputadosFav)
-            await AsyncStorage.setItem("favDeputados2", JSON.stringify(deputadosFav))
-        }
-    }
+    const addFavoriteButton = useCallback(async (deputadoId) => {
+        const updatedFavDeputados = [...favDeputados, deputadoId];
+        setFavDeputados(updatedFavDeputados);
+        await AsyncStorage.setItem("DeputadosFav", JSON.stringify(updatedFavDeputados));
+    }, [favDeputados, setFavDeputados]);
 
-    const remFavoriteButton = async (deputadoId) => {
-        const deputadosFav = JSON.parse(JSON.stringify(favDeputados))
-        const favDeputadosId = deputadosFav.toString().indexOf(deputadoId)
-        if (favDeputadosId >= 0) {
-            deputadosFav.splice(favDeputadosId, 1)
-            setFavDeputados(deputadosFav)
-            await AsyncStorage.setItem("favDeputados2", JSON.stringify(deputadosFav))
-        }
-    }
+    const remFavoriteButton = useCallback(async (deputadoId) => {
+        const updatedFavDeputados = favDeputados.filter((id) => id !== deputadoId);
+        setFavDeputados(updatedFavDeputados);
+        await AsyncStorage.setItem("DeputadosFav", JSON.stringify(updatedFavDeputados));
+    }, [favDeputados, setFavDeputados]);
 
-    function renderItem({ item }) {
-        return <Card.Title
-            key={item.id}
-            style={styles.Card}
-            title={`${item.nome}`}
-            subtitle={`${item.siglaPartido ? item.siglaPartido + " -" : ""} ${item.siglaUf}`}
-            titleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "bold" }}
-            subtitleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "600" }}
-            left={() => AvatarImage(item.urlFoto)}
-            right={() => <View style={{ flexDirection: "row" }}>{
-                isFavorite(item.id)
-            }<IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: item.id, name: item.nome })} /></View>}
-        />
-    }
+
+    const RenderItem = React.memo(({ item }) => {
+        return (
+            <Card.Title
+                key={item.id}
+                style={styles.Card}
+                title={`${item.nome}`}
+                subtitle={`${item.siglaPartido ? item.siglaPartido + " -" : ""} ${item.siglaUf}`}
+                titleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "bold" }}
+                subtitleStyle={{ color: "#101F41", marginLeft: 5, fontWeight: "600" }}
+                left={() => AvatarImage(item.urlFoto)}
+                right={() => <IconButton icon="arrow-right" onPress={() => navigation.push("deputado", { id: item.id, name: item.nome })} />}
+            />
+        );
+    });
+
     return (
         <View style={styles.Container}>
             <InputFilter setInputData={(value) => filter(value)} />
             <FlatList
                 data={deputados}
-                renderItem={renderItem}
+                renderItem={({ item }) => <RenderItem item={item} />}
                 keyExtractor={(item) => item.id.toString()}
-                ListFooterComponent={<ActivityIndicator size={50} animating={true} color="#ecb334" style={{ marginTop: 30 }} />}
                 decelerationRate={0.1}
                 style={styles.Scroll}
             />

@@ -2,13 +2,13 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
-const ButtonDeputado = ({ labelText = "", routeName = "", routeObject = [], usePush = true, initialPageButton = false, navigation }) => {
+const ButtonDeputado = ({ labelText = "", routeName = "", routeObject = [], usePush = true, initialPageButton = false, params={}, navigation }) => {
 
     const isPush = () => {
         if (usePush) {
-            navigation.push(routeName)
+            navigation.push(routeName,params)
         } else {
-            navigation.navigate(routeName, routeObject)
+            navigation.navigate(routeName, routeObject,params)
         }
     }
 

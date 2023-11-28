@@ -3,25 +3,24 @@ import { StyleSheet, View } from 'react-native'
 import { Avatar, Card, Text } from 'react-native-paper'
 import ButtonDeputado from '../../Button/Button'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import states from '../../../complements/stateNames';
 import calculateAge from '../../../complements/ageCalc';
 
-const DeputadoData = ({ name = "", state = "", school = "", partido = "", date = "", photo = "", navigation }) => {
-
+const DeputadoData = ({ id = 0, name = "", state = "", school = "", partido = "", date = "", photo = "", navigation }) => {
     function returnData() {
         return (
-            <View>
-                <View style={styles.ViewData}>
-                    <View style={styles.AvatarView}>
-                        <Avatar.Image style={{ marginRight: 50, backgroundColor: '#101F41' }} source={{ uri: photo }} />
-                    </View>
-                    <View style={styles.LeftData}>
-                        <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
-                        <Text style={styles.LeftText}>Idade: <Text>{calculateAge(date)}</Text></Text>
-                        <Text style={styles.LeftText}>Estado: <Text>{states[state.toUpperCase() || "DF"]}</Text></Text>
-                        <Text style={styles.LeftText}>Escolaridade: <Text>{school}</Text></Text>
-                        <Text style={styles.TextPartido}>Partido {partido}</Text>
-                    </View>
+            <View style={styles.ViewData}>
+                <View style={styles.AvatarView}>
+                    <Avatar.Image style={{ marginRight: 50, backgroundColor: '#101F41' }} source={{ uri: photo }} />
+                </View>
+                <View style={styles.LeftData}>
+                    <Text style={styles.LeftText}>Nome: <Text>{name}</Text></Text>
+                    <Text style={styles.LeftText}>Idade: <Text>{calculateAge(date)}</Text></Text>
+                    <Text style={styles.LeftText}>Estado: <Text>{states[state.toUpperCase() || "DF"]}</Text></Text>
+                    <Text style={styles.LeftText}>Escolaridade: <Text>{school}</Text></Text>
+                    <Text style={styles.TextPartido}>Partido {partido}</Text>
                 </View>
             </View>
         )
@@ -38,7 +37,7 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
     function eventosText() {
         return (
             <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
-                <FontAwesome name="dollar" size={20} />
+                <MaterialCommunityIcons name="newspaper-variant" size={20} />
                 <Text>Eventos</Text>
             </View>
         )
@@ -46,17 +45,8 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
     function frentesText() {
         return (
             <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
-                <FontAwesome name="dollar" size={20} />
+                <MaterialCommunityIcons name="bookshelf" size={20} />
                 <Text>Frentes</Text>
-            </View>
-        )
-    }
-
-    function discursosText() {
-        return (
-            <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
-                <FontAwesome name="dollar" size={20} />
-                <Text>Discursos</Text>
             </View>
         )
     }
@@ -64,7 +54,7 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
     function orgaosText() {
         return (
             <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
-                <FontAwesome name="dollar" size={20} />
+                <MaterialCommunityIcons name="greenhouse" size={20} />
                 <Text>Orgãos</Text>
             </View>
         )
@@ -72,7 +62,7 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
     function mandatosText() {
         return (
             <View style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignContent: 'center', alignItems: "center" }}>
-                <FontAwesome name="dollar" size={20} />
+                <MaterialCommunityIcons name="account-supervisor" size={20} />
                 <Text>Mandatos</Text>
             </View>
         )
@@ -85,14 +75,13 @@ const DeputadoData = ({ name = "", state = "", school = "", partido = "", date =
                 left={() => returnData()}
             />
             <View style={{ flexDirection: "row" }}>
-                <ButtonDeputado labelText={gastosText()} routeName={"gastos-deputado"} navigation={navigation} />
-                <ButtonDeputado labelText={eventosText()} routeName={"gastos-deputado"} navigation={navigation} />
-                <ButtonDeputado labelText={frentesText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={gastosText()} routeName={"gastos-deputado"} navigation={navigation} params={{ id: id }} />
+                <ButtonDeputado labelText={eventosText()} routeName={"eventos-deputado"} navigation={navigation} params={{ id: id }} />
+                <ButtonDeputado labelText={frentesText()} routeName={"frentes-deputado"} navigation={navigation} params={{ id: id }} />
             </View>
             <View style={{ flexDirection: "row" }}>
-                <ButtonDeputado labelText={discursosText()} routeName={"gastos-deputado"} navigation={navigation} />
-                <ButtonDeputado labelText={orgaosText()} routeName={"gastos-deputado"} navigation={navigation} />
-                <ButtonDeputado labelText={mandatosText()} routeName={"gastos-deputado"} navigation={navigation} />
+                <ButtonDeputado labelText={orgaosText()} routeName={"orgaos-deputado"} navigation={navigation} params={{ id: id }} />
+                <ButtonDeputado labelText={mandatosText()} routeName={"mandatos-deputado"} navigation={navigation} params={{ id: id }} />
             </View>
 
         </View>
@@ -125,7 +114,7 @@ const styles = StyleSheet.create({
 
     TextPartido: {
         textAlign: "center",
-        color: "#D06605",
+        color: "#D58C00",
         fontWeight: "700",
         fontSize: 20,
         textTransform: "uppercase",
@@ -134,7 +123,7 @@ const styles = StyleSheet.create({
     },
 
     CardStyle: {
-        backgroundColor: "#FFAD62",
+        backgroundColor: "#FFE2A3",
         marginTop: 28,
         marginBottom: 48,
         borderRadius: 20,
@@ -142,7 +131,7 @@ const styles = StyleSheet.create({
     },
 
     AvatarView: {
-        backgroundColor: "#D58C00",
+        backgroundColor: "#D9D9D9",
         width: 70,
         height: 70,
         borderRadius: 58,

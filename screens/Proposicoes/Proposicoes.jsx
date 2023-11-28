@@ -29,7 +29,6 @@ const Proposicoes = () => {
         })
     }
 
-
     return (
         <PaperProvider>
             <View style={styles.Container}>
