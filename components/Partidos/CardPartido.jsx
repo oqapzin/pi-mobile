@@ -17,11 +17,7 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
     }, [arrayData])
 
 
-    const filter = (inputValue) => {
-        /*Desconectar as 'arrays' para que não tenha conflitos entre arrays.*/
-        let array = JSON.parse(JSON.stringify(oldDataPartidos))
-        setPartidos(array.filter((v) => v.nome.includes(inputValue)))
-    }
+
 
 
 
@@ -40,7 +36,6 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
     console.log(IconButton)
     return (
         <View style={styles.Container}>
-            <InputFilter setInputData={(value) => filter(value)} />
             <FlatList
                 data={partidos}
                 renderItem={renderItem}
