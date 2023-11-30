@@ -6,8 +6,9 @@ const InputFilter = ({ setInputData, whitePlaceHolder = false }) => {
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
-        setInputData(searchQuery)
-    }, [searchQuery])
+        setInputData(searchQuery),console.log(Searchbar)
+    }, [searchQuery]
+    )
 
     return (
         <Searchbar

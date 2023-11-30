@@ -39,7 +39,6 @@ const CardPartido = ({ navigation, arrayData = [] }) => {
     
     return (
         <View style={styles.Container}>
-            <InputFilter setInputData={(value) => filter(value)} />
             <FlatList
                 data={partidos}
                 renderItem={renderItem}

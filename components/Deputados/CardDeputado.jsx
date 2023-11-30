@@ -43,6 +43,7 @@ const CardDeputado = ({ navigation, arrayData = [] }) => {
         /*Desconectar as 'arrays' para que não tenha conflitos entre arrays.*/
         let array = JSON.parse(JSON.stringify(oldDataDeputados))
         setDeputados(array.filter((v) => v.nome.includes(inputValue)))
+        console.log(inputValue)
     }
 
    /*  const isFavorite = useCallback((deputadoId, deputadoName) => {
